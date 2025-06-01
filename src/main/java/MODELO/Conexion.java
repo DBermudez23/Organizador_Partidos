@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package MODELO;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.ZoneId;
-
-import VISTA.InicioSesion.LogInVista;
-import VISTA.InicioSesion.RegistroVista;
 
 /**
  * Clase de conexión y autenticación adaptada al proyecto Fútbol-5.
@@ -59,7 +51,6 @@ public class Conexion {
         // Driver JDBC moderno para MySQL
         Class.forName("com.mysql.cj.jdbc.Driver");
         // URL de conexión: localhost, puerto 3306, schema "futbol5db"
-        // Ajusta el nombre de la base de datos, usuario y contraseña según tu entorno
         String url = "jdbc:mysql://localhost:3306/futbol5db?useSSL=false&serverTimezone=UTC";
         String user = "root";
         String pass = ""; // pon aquí la contraseña real si no es vacía
@@ -132,8 +123,7 @@ public class Conexion {
                 j.setModoParticipacion( ModoParticipacion.valueOf(rs.getString("modo_participacion")) );
                 j.setInfracciones(rs.getInt("infracciones"));
                 j.setCalificacionPromedio(rs.getFloat("calificacion_promedio"));
-                j.setCalificacionUltimoPartido(rs.getInt("calificacion_ultimo_partido"));
-                // Puedes cargar también lista de calificaciones si lo deseas
+                j.setCalificacionUltimoPartido(rs.getFloat("calificacion_ultimo_partido"));
                 return j;
             }
         } catch (Exception e) {
@@ -201,7 +191,7 @@ public class Conexion {
                 psJugador.setString(4, j.getModo().name());
                 psJugador.setInt(5, j.getInfracciones());
                 psJugador.setFloat(6, j.getCalificacionPromedio());
-                psJugador.setInt(7, j.getCalificacionUltimoPartido());
+                psJugador.setFloat(7, j.getCalificacionUltimoPartido());
                 psJugador.executeUpdate();
 
                 con.commit();
@@ -347,4 +337,3 @@ public class Conexion {
         return null;
     }
 }
-

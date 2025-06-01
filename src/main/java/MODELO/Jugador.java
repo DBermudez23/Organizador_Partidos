@@ -88,7 +88,6 @@ public class Jugador implements Usuario {
 
     public void setCalificaciones(List<Calificacion> calificaciones) {
         this.calificaciones = calificaciones;
-        // Opcional: recalcular promedio inmediato
         actualizarCalificacionPromedio();
     }
 
@@ -96,7 +95,10 @@ public class Jugador implements Usuario {
         return calificacionPromedio;
     }
 
-    private void setCalificacionPromedio(float calificacionPromedio) {
+    /** 
+     * Ahora public para que Conexion pueda invocarlo 
+     */
+    public void setCalificacionPromedio(float calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
     }
 
@@ -175,7 +177,6 @@ public class Jugador implements Usuario {
      */
     @Override
     public boolean login() {
-        // Si el jugador ya fue cargado desde la base y tiene ID > 0, consideramos que “está listo”:
         return this.id > 0;
     }
 }

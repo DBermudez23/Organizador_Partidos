@@ -1,6 +1,12 @@
 C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\com\mycompany\partidosfutbol5\PartidosFutbol5.java
 C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\CONTROLADOR\ControladorLogIn.java
 C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\CONTROLADOR\ControladorRegistro.java
+C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\MODELO\Administrador.java
+C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\MODELO\Conexion.java
+C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\MODELO\Jugador.java
 C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\MODELO\MySql.java
+C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\MODELO\Singleton.java
+C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\MODELO\Usuario.java
 C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\VISTA\InicioSesion\LogInVista.java
 C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\VISTA\InicioSesion\RegistroVista.java
+C:\Users\danie\Documents\NetBeansProjects\PartidosFutbol5\src\main\java\VISTA\VistaOpcionesAdmin\MenuAdmin.java
