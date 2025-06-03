@@ -50,8 +50,8 @@ public class Conexion {
     public Connection obtenerConexion() throws SQLException, ClassNotFoundException {
         // Driver JDBC moderno para MySQL
         Class.forName("com.mysql.cj.jdbc.Driver");
-        // URL de conexión: localhost, puerto 3306, schema "futbol5db"
-        String url = "jdbc:mysql://localhost:3306/futbol5db?useSSL=false&serverTimezone=UTC";
+        // URL de conexión: localhost, puerto 3306, schema "partidos"
+        String url = "jdbc:mysql://localhost:3306/partidos?useSSL=false&serverTimezone=UTC";
         String user = "root";
         String pass = ""; // pon aquí la contraseña real si no es vacía
         return DriverManager.getConnection(url, user, pass);

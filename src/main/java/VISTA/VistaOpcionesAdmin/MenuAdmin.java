@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package VISTA.InicioSesion.VistaOpcionesAdmin;
+package VISTA.VistaOpcionesAdmin;
 
 /**
  *
@@ -26,21 +26,85 @@ public class MenuAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        listaJugadoresButton = new javax.swing.JButton();
+        crearPartidoButton = new javax.swing.JButton();
+        sancionesPendientesButton = new javax.swing.JButton();
+        PartidoActualButton = new javax.swing.JButton();
+        imagenJugador = new javax.swing.JLabel();
+        imagenAdmin = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        listaJugadoresButton.setBackground(new java.awt.Color(0, 102, 51));
+        listaJugadoresButton.setForeground(new java.awt.Color(255, 255, 255));
+        listaJugadoresButton.setText("VER TODOS LOS JUGADORES");
+        listaJugadoresButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listaJugadoresButtonActionPerformed(evt);
+            }
+        });
+
+        crearPartidoButton.setBackground(new java.awt.Color(0, 102, 51));
+        crearPartidoButton.setForeground(new java.awt.Color(255, 255, 255));
+        crearPartidoButton.setText("CREAR PARTIDO");
+
+        sancionesPendientesButton.setBackground(new java.awt.Color(0, 102, 51));
+        sancionesPendientesButton.setForeground(new java.awt.Color(255, 255, 255));
+        sancionesPendientesButton.setText("SANCIONES PENDIENTES");
+
+        PartidoActualButton.setBackground(new java.awt.Color(0, 102, 51));
+        PartidoActualButton.setForeground(new java.awt.Color(255, 255, 255));
+        PartidoActualButton.setText("INFO PARTIDO ACTUAL");
+
+        imagenJugador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISTA/VistaOpcionesAdmin/jugadorSombra.png"))); // NOI18N
+
+        imagenAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISTA/VistaOpcionesAdmin/Administrador.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(230, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(crearPartidoButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sancionesPendientesButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PartidoActualButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(listaJugadoresButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(48, 48, 48)
+                        .addComponent(imagenAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(imagenJugador)
+                        .addGap(304, 304, 304))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(imagenJugador)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(imagenAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(listaJugadoresButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(crearPartidoButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(sancionesPendientesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(PartidoActualButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void listaJugadoresButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaJugadoresButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaJugadoresButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +142,11 @@ public class MenuAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton PartidoActualButton;
+    public javax.swing.JButton crearPartidoButton;
+    public javax.swing.JLabel imagenAdmin;
+    public javax.swing.JLabel imagenJugador;
+    public javax.swing.JButton listaJugadoresButton;
+    public javax.swing.JButton sancionesPendientesButton;
     // End of variables declaration//GEN-END:variables
 }
