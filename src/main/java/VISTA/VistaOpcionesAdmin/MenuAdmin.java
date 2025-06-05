@@ -65,7 +65,7 @@ public class MenuAdmin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(230, Short.MAX_VALUE)
+                .addContainerGap(229, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,7 +96,7 @@ public class MenuAdmin extends javax.swing.JFrame {
                         .addComponent(sancionesPendientesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(PartidoActualButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
@@ -142,11 +142,11 @@ public class MenuAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton PartidoActualButton;
-    public javax.swing.JButton crearPartidoButton;
-    public javax.swing.JLabel imagenAdmin;
-    public javax.swing.JLabel imagenJugador;
-    public javax.swing.JButton listaJugadoresButton;
-    public javax.swing.JButton sancionesPendientesButton;
+    private javax.swing.JButton PartidoActualButton;
+    private javax.swing.JButton crearPartidoButton;
+    private javax.swing.JLabel imagenAdmin;
+    private javax.swing.JLabel imagenJugador;
+    private javax.swing.JButton listaJugadoresButton;
+    private javax.swing.JButton sancionesPendientesButton;
     // End of variables declaration//GEN-END:variables
 }
