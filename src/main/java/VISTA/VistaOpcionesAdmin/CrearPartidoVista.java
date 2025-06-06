@@ -1,82 +1,206 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package VISTA.VistaOpcionesAdmin;
 
-/**
- *
- * @author danie
- */
-public class CrearPartidoVista extends javax.swing.JFrame {
+import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.util.Date;
 
-    /**
-     * Creates new form CrearPartidoVista
-     */
+/**
+ * Vista para crear un nuevo partido:
+ * - Selección de fecha (JSpinner)
+ * - Selección de formación (JComboBox)
+ * - Lista de jugadores disponibles (JList en JScrollPane)
+ * - Botones: Generar Reparto, Preconfirmar, Guardar Partido, Atrás
+ *
+ * NOTA: Los componentes públicos permiten que el controlador los asocie listeners y recupere datos.
+ */
+public class CrearPartidoVista extends JFrame {
+
+    // 1) Componentes públicos para que el controlador asocie listeners y acceda a sus valores:
+    public JSpinner fechaSpinner;
+    public JComboBox<String> formacionCombo;
+    public JList<String> jugadoresList;
+    public JButton generarRepartoButton;
+    public JButton preconfirmarButton;
+    public JButton guardarPartidoButton;
+    public JButton atrasButton;
+
+    // Modelo para la lista de jugadores (puede reemplazarse por un DefaultListModel<Jugador>)
+    private DefaultListModel<String> listaModeloJugadores;
+
+    // Panel principal
+    private JPanel mainPanel;
+
     public CrearPartidoVista() {
+        super("Crear Partido - Fútbol 5");
         initComponents();
+        setLocationRelativeTo(null); // Centrar ventana en pantalla
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        pack();
+    }
+
+    private void initComponents() {
+        // =====================
+        // 1) Panel principal
+        // =====================
+        mainPanel = new JPanel();
+        mainPanel.setBackground(Color.WHITE);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // =============================
+        // 2) Fecha de Partido (JSpinner)
+        // =============================
+        JLabel fechaLabel = new JLabel("Fecha del Partido:");
+        fechaLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        fechaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(fechaLabel);
+        mainPanel.add(Box.createVerticalStrut(5));
+
+        // Spinner para seleccionar fecha (solo fecha, sin hora)
+        fechaSpinner = new JSpinner(new SpinnerDateModel(new Date(), null, null, java.util.Calendar.DAY_OF_MONTH));
+        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(fechaSpinner, "dd/MM/yyyy");
+        fechaSpinner.setEditor(dateEditor);
+        fechaSpinner.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
+        fechaSpinner.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(fechaSpinner);
+        mainPanel.add(Box.createVerticalStrut(15));
+
+        // ====================================================
+        // 3) Selección de Formación (JComboBox<String>)
+        // ====================================================
+        JLabel formacionLabel = new JLabel("Formación:");
+        formacionLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        formacionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(formacionLabel);
+        mainPanel.add(Box.createVerticalStrut(5));
+
+        // ComboBox con formaciones de ejemplo
+        formacionCombo = new JComboBox<>(new String[] {
+            "Selección...", 
+            "Formación 1: 2-2", 
+            "Formación 2: 3-1", 
+            "Formación 3: Libre"
+        });
+        formacionCombo.setAlignmentX(Component.LEFT_ALIGNMENT);
+        formacionCombo.setMaximumSize(new Dimension(Integer.MAX_VALUE, 28));
+        mainPanel.add(formacionCombo);
+        mainPanel.add(Box.createVerticalStrut(15));
+
+        // ===============================
+        // 4) Lista de Jugadores (JList)
+        // ===============================
+        JLabel jugadoresLabel = new JLabel("Jugadores Disponibles:");
+        jugadoresLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        jugadoresLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        mainPanel.add(jugadoresLabel);
+        mainPanel.add(Box.createVerticalStrut(5));
+
+        // Modelo vacío inicialmente; el controlador llenará con nombres reales
+        listaModeloJugadores = new DefaultListModel<>();
+        // Ejemplo de datos (para probar); el controlador deberá reemplazar esto:
+        listaModeloJugadores.addElement("Andrés Martínez");
+        listaModeloJugadores.addElement("Miguel Rodríguez");
+        listaModeloJugadores.addElement("Luis González");
+        listaModeloJugadores.addElement("Carlos Ramírez");
+        listaModeloJugadores.addElement("Juan Fernández");
+        listaModeloJugadores.addElement("Pedro García");
+
+        jugadoresList = new JList<>(listaModeloJugadores);
+        jugadoresList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jugadoresList.setVisibleRowCount(8);
+        jugadoresList.setFont(new Font("SansSerif", Font.PLAIN, 13));
+
+        JScrollPane scrollJugadores = new JScrollPane(jugadoresList);
+        scrollJugadores.setAlignmentX(Component.LEFT_ALIGNMENT);
+        scrollJugadores.setPreferredSize(new Dimension(350, 150));
+        scrollJugadores.setMaximumSize(new Dimension(Integer.MAX_VALUE, 150));
+        mainPanel.add(scrollJugadores);
+        mainPanel.add(Box.createVerticalStrut(20));
+
+        // ========================================
+        // 5) Panel de Botones de Acción
+        // ========================================
+        JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 0));
+        botonesPanel.setBackground(Color.WHITE);
+        botonesPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        generarRepartoButton = new JButton("Generar Reparto");
+        generarRepartoButton.setBackground(new Color(0, 102, 51));
+        generarRepartoButton.setForeground(Color.WHITE);
+        generarRepartoButton.setFocusable(false);
+        generarRepartoButton.setPreferredSize(new Dimension(140,  thirtyTwo()));
+        botonesPanel.add(generarRepartoButton);
+
+        preconfirmarButton = new JButton("Preconfirmar");
+        preconfirmarButton.setBackground(new Color(0, 102, 51));
+        preconfirmarButton.setForeground(Color.WHITE);
+        preconfirmarButton.setFocusable(false);
+        preconfirmarButton.setPreferredSize(new Dimension(120, thirtyTwo()));
+        botonesPanel.add(preconfirmarButton);
+
+        guardarPartidoButton = new JButton("Guardar Partido");
+        guardarPartidoButton.setBackground(new Color(0, 102, 51));
+        guardarPartidoButton.setForeground(Color.WHITE);
+        guardarPartidoButton.setFocusable(false);
+        guardarPartidoButton.setPreferredSize(new Dimension(140, thirtyTwo()));
+        botonesPanel.add(guardarPartidoButton);
+
+        atrasButton = new JButton("ATRÁS");
+        atrasButton.setBackground(new Color(200, 0, 0));
+        atrasButton.setForeground(Color.WHITE);
+        atrasButton.setFocusable(false);
+        atrasButton.setPreferredSize(new Dimension(100, thirtyTwo()));
+        botonesPanel.add(atrasButton);
+
+        mainPanel.add(botonesPanel);
+        mainPanel.add(Box.createVerticalStrut(10));
+
+        // ========================================
+        // 6) Añadir panel principal al JFrame
+        // ========================================
+        getContentPane().add(mainPanel);
+    }
+
+    private int thirtyTwo() {
+        return 32;
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * Permite que el controlador reemplace el contenido de la lista de jugadores.
+     * Por ejemplo: cargar un DefaultListModel<String> con nombres reales.
      */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 787, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+    public void setJugadoresLista(DefaultListModel<String> modelo) {
+        jugadoresList.setModel(modelo);
+    }
 
     /**
-     * @param args the command line arguments
+     * Permite al controlador asociar un ListSelectionListener a la JList de jugadores.
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    public void addJugadoresListSelectionListener(ListSelectionListener listener) {
+        jugadoresList.addListSelectionListener(listener);
+    }
+
+    /**
+     * Método principal de prueba para abrir únicamente esta ventana.
+     */
+    public static void main(String[] args) {
+        // Intentar usar Nimbus, si está disponible
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CrearPartidoVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CrearPartidoVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CrearPartidoVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CrearPartidoVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            // Si falla, no importa: se usará el L&F por defecto.
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CrearPartidoVista().setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            CrearPartidoVista ventana = new CrearPartidoVista();
+            ventana.setVisible(true);
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
 }

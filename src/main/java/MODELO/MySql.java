@@ -19,7 +19,7 @@ public class MySql {
     public Connection base_datos() throws SQLException{   
         try {
             Class.forName("com.mysql.jdbc.Driver"); // ESTABLECE LA CONEXION BASE DE DATOS 
-            Conexion = DriverManager.getConnection("jdbc:mysql://localhost/partidos","root","");// CONEXION A LA BASE DE DATOS ABIERTA                       
+            Conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/partidos?useSSL=false$serverTimezone=UTC","root","");// CONEXION A LA BASE DE DATOS ABIERTA                       
           } catch (ClassNotFoundException ex) {
               JOptionPane.showMessageDialog(null, "Error de  conexión con el servidor ");
           } return Conexion;

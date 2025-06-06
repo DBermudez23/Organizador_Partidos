@@ -7,18 +7,17 @@ import MODELO.Singleton;
 import VISTA.InicioSesion.LogInVista;
 import VISTA.InicioSesion.RegistroVista;
 import VISTA.VistaOpcionesAdmin.MenuAdmin;
-import CONTROLADOR.ControladorOpcionesAdmin;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import VISTA.VistaOpcionesJugador.MenuJugador;
 
 /**
- * Controlador para la pantalla de inicio de sesión.
- * - Valida credenciales usando MODELO.Conexion.
- * - Según el tipo de usuario, redirige a la vista correspondiente.
- * - Permite abrir la vista de registro de nuevo jugador.
+ * Controlador para la pantalla de inicio de sesión (LogIn).
+ * - Lee los datos ingresados en LogInVista.
+ * - Invoca a MODELO.Conexion para autenticar.
+ * - Según el tipo de usuario (Jugador o Administrador) en Singleton,
+ *   abre la vista correspondiente.
+ * - Permite cambiar a la pantalla de registro de nuevo jugador.
  */
-public class ControladorLogIn implements ActionListener {
+public class ControladorLogIn implements java.awt.event.ActionListener {
 
     private final LogInVista vistaLogin;
     private final RegistroVista vistaRegistro;
@@ -27,36 +26,43 @@ public class ControladorLogIn implements ActionListener {
         this.vistaLogin = vistaLogin;
         this.vistaRegistro = vistaRegistro;
 
-        // Asociar botones de la vista de login a este ActionListener
+        // Asociar los botones de la vista de login a este ActionListener
         this.vistaLogin.ingresarBoton.addActionListener(this);
         this.vistaLogin.nuevoUsuarioBoton.addActionListener(this);
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(java.awt.event.ActionEvent e) {
         if (e.getSource() == vistaLogin.ingresarBoton) {
-            // 1) Leer usuario y clave desde los campos de la vista
-            String username = vistaLogin.getUsername().trim();
-            // getPassword() suele devolver un char[], así que lo convertimos a String:
+            // -------------------------------------------------
+            // 1) Leer usuario y clave desde la vista:
+            // -------------------------------------------------
+            String username = vistaLogin.getUsername();
             String password = new String(vistaLogin.getPassword());
 
-            // 2) Intentar autenticar mediante el modelo
+            // -------------------------------------------------
+            // 2) Intentar autenticar mediante MODELO.Conexion:
+            // -------------------------------------------------
             Conexion conexion = new Conexion(username, password);
             boolean exito = conexion.ingresar();
 
             if (exito) {
-                // 3) Si el login fue exitoso, recuperamos el objeto cargado en el Singleton
+                // -------------------------------------------------
+                // 3) Si el login fue exitoso, recuperamos
+                //    el objeto Usuario (Jugador o Administrador)
+                //    que se almacenó dentro del Singleton.
+                // -------------------------------------------------
                 Object usuarioActual = Singleton.getInstance().getUsuario();
 
                 if (usuarioActual instanceof Jugador) {
                     Jugador j = (Jugador) usuarioActual;
                     System.out.println("Login exitoso como Jugador: " + j.getNombre());
 
-                    // TODO: Abrir la vista/controlador de Jugador
-                    // Ejemplo:
-                    // JugadorOpcionesVista vistaJugador = new JugadorOpcionesVista();
-                    // new JugadorOpcionesController(vistaJugador);
-                    // vistaJugador.setVisible(true);
+                    // -------------------------------------------------
+                    // 4) Abrir Menú de Jugador:
+                    // -------------------------------------------------
+                    MenuJugador vistaJugador = new MenuJugador();
+                    new ControladorMenuJugador(vistaJugador);
 
                     // Cerrar la ventana de login
                     vistaLogin.dispose();
@@ -65,30 +71,34 @@ public class ControladorLogIn implements ActionListener {
                     Administrador a = (Administrador) usuarioActual;
                     System.out.println("Login exitoso como Administrador");
 
-                    // TODO: Abrir la vista/controlador de Administrador
-                    // Ejemplo:
+                    // -------------------------------------------------
+                    // 5) Abrir Menú de Administrador:
+                    // -------------------------------------------------
                     MenuAdmin vistaAdmin = new MenuAdmin();
                     new ControladorOpcionesAdmin(vistaAdmin);
-                    vistaAdmin.setVisible(true);
-                    vistaLogin.setVisible(false);
+
+                    // Cerrar (o esconder) la ventana de login
+                    vistaLogin.dispose();
                 }
                 else {
-                    // Caso muy raro: el objeto en Singleton no es ni Jugador ni Administrador
-                    vistaLogin.mostrarError("Tipo de usuario desconocido.");
+                    // -------------------------------------------------
+                    // Caso muy raro: Si singleton no contiene ni Jugador ni Administrador
+                    // -------------------------------------------------
+                    vistaLogin.mostrarError("Tipo de usuario desconocido. Comuníquese con soporte.");
                 }
-            } else {
-                // Si la conexión/consulta falló o credenciales inválidas
-                vistaLogin.mostrarError("Credenciales inválidas. Intente de nuevo.");
+            }
+            else {
+                // -------------------------------------------------
+                // 6) Credenciales inválidas: mostrar mensaje de error
+                // -------------------------------------------------
+                vistaLogin.mostrarError("Usuario o contraseña incorrectos. Intente de nuevo.");
             }
 
         } else if (e.getSource() == vistaLogin.nuevoUsuarioBoton) {
-            // 4) Si presionó “Nuevo Usuario”, abrimos la vista de registro
-            System.out.println("Botón Nuevo Usuario presionado");
-
-            // Creamos el controlador de registro (RegistroController) con su vista
-            ControladorRegistro controladorRegistro = new ControladorRegistro(vistaRegistro);
-
-            // Mostramos la ventana de registro y ocultamos la de login
+            // -------------------------------------------------
+            // 7) Cuando presionan “Nuevo Usuario”: abrir registro
+            // -------------------------------------------------
+            ControladorRegistro controladorRegistro = new ControladorRegistro(vistaLogin, vistaRegistro);
             vistaRegistro.setVisible(true);
             vistaLogin.setVisible(false);
         }

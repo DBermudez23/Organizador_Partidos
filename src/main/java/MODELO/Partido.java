@@ -6,33 +6,40 @@ import java.util.List;
 
 /**
  * Representa un Partido de Fútbol-5 en el sistema.
- * Contiene información de fecha, estado, formacion, jugadores y equipos con resultados.
+ * Contiene información de fecha, estado, formación, lista de jugadores y dos equipos (rojo y azul) con resultados.
  */
 public class Partido {
 
     // ----------------------------
     // 1. Atributos
     // ----------------------------
-    private int partidoId;                     // Id del partido (clave primaria en BD)
-    private LocalDate fecha;                   // Fecha programada del partido
-    private boolean confirmado;                // Indica si el partido ya fue confirmado
-    
-    private Formaciones formacion;             // Plantilla utilizada para repartir
-    private List<Jugador> jugadores;           // Lista de jugadores inscritos
-    
-    private EquipoRojo equipoRojo;             // Equipo Rojo asignado después del reparto
-    private EquipoAzul equipoAzul;             // Equipo Azul asignado después del reparto
-    
-    private int resultadoRojo;                 // Goles anotados por el Equipo Rojo
-    private int resultadoAzul;                 // Goles anotados por el Equipo Azul
+    private int partidoId;             // Id del partido (clave primaria en BD)
+    private LocalDate fecha;           // Fecha programada del partido
+    private boolean confirmado;        // Indica si el partido ya fue confirmado
+
+    private Formaciones formacion;     // Plantilla utilizada para repartir
+    private List<Jugador> jugadores;   // Lista de jugadores inscritos
+
+    // Ahora usamos una única clase Equipo en lugar de EquipoRojo/EquipoAzul
+    private Equipo equipoRojo;         // Equipo Rojo asignado después del reparto
+    private Equipo equipoAzul;         // Equipo Azul asignado después del reparto
+
+    private int resultadoRojo;         // Goles anotados por el Equipo Rojo
+    private int resultadoAzul;         // Goles anotados por el Equipo Azul
 
     // ----------------------------
     // 2. Constructores
     // ----------------------------
     public Partido() {
         this.jugadores = new ArrayList<>();
-        this.equipoRojo = new EquipoRojo();
-        this.equipoAzul = new EquipoAzul();
+
+        // Creamos dos equipos vacíos y asignamos sus tipos
+        this.equipoRojo = new Equipo();
+        this.equipoRojo.setTipo(Equipo.TipoEquipo.ROJO);
+
+        this.equipoAzul = new Equipo();
+        this.equipoAzul.setTipo(Equipo.TipoEquipo.AZUL);
+
         this.confirmado = false;
         this.resultadoRojo = 0;
         this.resultadoAzul = 0;
@@ -87,20 +94,26 @@ public class Partido {
         this.jugadores = jugadores;
     }
 
-    public EquipoRojo getEquipoRojo() {
+    public Equipo getEquipoRojo() {
         return equipoRojo;
     }
 
-    public void setEquipoRojo(EquipoRojo equipoRojo) {
+    public void setEquipoRojo(Equipo equipoRojo) {
         this.equipoRojo = equipoRojo;
+        if (equipoRojo != null) {
+            this.equipoRojo.setTipo(Equipo.TipoEquipo.ROJO);
+        }
     }
 
-    public EquipoAzul getEquipoAzul() {
+    public Equipo getEquipoAzul() {
         return equipoAzul;
     }
 
-    public void setEquipoAzul(EquipoAzul equipoAzul) {
+    public void setEquipoAzul(Equipo equipoAzul) {
         this.equipoAzul = equipoAzul;
+        if (equipoAzul != null) {
+            this.equipoAzul.setTipo(Equipo.TipoEquipo.AZUL);
+        }
     }
 
     public int getResultadoRojo() {
@@ -127,7 +140,7 @@ public class Partido {
      * Agrega un jugador a la lista de inscritos, si aún no está y no está penalizado.
      *
      * @param j Jugador a inscribir
-     * @return true si se agregó, false si ya estaba o está penalizado
+     * @return true si se agregó; false si ya estaba o está penalizado
      */
     public boolean agregarJugador(Jugador j) {
         if (j == null) return false;
@@ -166,11 +179,28 @@ public class Partido {
     // ----------------------------
 
     /**
-     * Retorna true si ya se asignaron ambos equipos (rojo y azul).
+     * Retorna true si ya se asignaron ambos equipos (rojo y azul)
+     * y además cada uno tiene al menos un jugador.
      */
     public boolean equiposAsignados() {
-        return equipoRojo != null && equipoAzul != null
-               && !equipoRojo.getJugadores().isEmpty()
-               && !equipoAzul.getJugadores().isEmpty();
+        return equipoRojo != null
+            && equipoAzul != null
+            && !equipoRojo.getJugadores().isEmpty()
+            && !equipoAzul.getJugadores().isEmpty();
+    }
+
+    /**
+     * Devuelve la lista de todos los jugadores que ya están dentro de
+     * los dos equipos (rojo + azul). Útil por ejemplo para mostrar en la vista.
+     */
+    public List<Jugador> getTodosLosJugadoresEnEquipos() {
+        List<Jugador> todos = new ArrayList<>();
+        if (equipoRojo != null && equipoRojo.getJugadores() != null) {
+            todos.addAll(equipoRojo.getJugadores());
+        }
+        if (equipoAzul != null && equipoAzul.getJugadores() != null) {
+            todos.addAll(equipoAzul.getJugadores());
+        }
+        return todos;
     }
 }

@@ -1,188 +1,140 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package VISTA.VistaOpcionesJugador;
 
-/**
- *
- * @author danie
- */
-public class MenuJugador extends javax.swing.JFrame {
+import javax.swing.*;
+import java.awt.*;
 
-    /**
-     * Creates new form MenuJugador
-     */
+/**
+ * Menú de opciones para el Jugador.
+ * Contiene botones para:
+ *  - Próximo Partido
+ *  - Calificación Último Partido
+ *  - Mi Perfil
+ *  - Enviar Mail
+ *  - Reglas
+ *
+ * Esta versión usa un diseño más limpio y amplio,
+ * con un cabezal gráfico y botones de color verde (0,102,51).
+ */
+public class MenuJugador extends JFrame {
+
+    // Componentes públicos para que el controlador les asocie listeners
+    public JButton proximoPartidoButton;
+    public JButton calificacionUltimoButton;
+    public JButton miPerfilButton;
+    public JButton mailButton;
+    public JButton reglasButton;
+
+    // Etiqueta de imagen (logo o ilustración del jugador)
+    private JLabel encabezadoLabel;
+
+    // Panel principal de contenido
+    private JPanel mainPanel;
+
     public MenuJugador() {
+        super("Menú Jugador");
         initComponents();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        pack();
+    }
+
+    private void initComponents() {
+        // Panel principal con BoxLayout vertical
+        mainPanel = new JPanel();
+        mainPanel.setBackground(Color.WHITE);
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 30, 20, 30));
+
+        // 1) Encabezado gráfico (puedes reemplazar "menuJugador.png" por tu propio recurso)
+        encabezadoLabel = new JLabel();
+        encabezadoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        ImageIcon icon = new ImageIcon(getClass().getResource("/VISTA/VistaOpcionesJugador/menuJugador.png"));
+        encabezadoLabel.setIcon(icon);
+        mainPanel.add(encabezadoLabel);
+        mainPanel.add(Box.createVerticalStrut(20));
+
+        // 2) Botones: misma anchura, color de fondo verde (0,102,51), texto blanco, altura fija
+        Dimension buttonSize = new Dimension(300,  forty());
+        Color verde = new Color(0, 102, 51);
+
+        proximoPartidoButton = new JButton("PRÓXIMO PARTIDO");
+        proximoPartidoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        proximoPartidoButton.setBackground(verde);
+        proximoPartidoButton.setForeground(Color.WHITE);
+        proximoPartidoButton.setFocusable(false);
+        proximoPartidoButton.setPreferredSize(buttonSize);
+        proximoPartidoButton.setMaximumSize(buttonSize);
+        mainPanel.add(proximoPartidoButton);
+        mainPanel.add(Box.createVerticalStrut(15));
+
+        calificacionUltimoButton = new JButton("CALIFICACIÓN ÚLTIMO PARTIDO");
+        calificacionUltimoButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        calificacionUltimoButton.setBackground(verde);
+        calificacionUltimoButton.setForeground(Color.WHITE);
+        calificacionUltimoButton.setFocusable(false);
+        calificacionUltimoButton.setPreferredSize(buttonSize);
+        calificacionUltimoButton.setMaximumSize(buttonSize);
+        mainPanel.add(calificacionUltimoButton);
+        mainPanel.add(Box.createVerticalStrut(15));
+
+        miPerfilButton = new JButton("MI PERFIL");
+        miPerfilButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        miPerfilButton.setBackground(verde);
+        miPerfilButton.setForeground(Color.WHITE);
+        miPerfilButton.setFocusable(false);
+        miPerfilButton.setPreferredSize(buttonSize);
+        miPerfilButton.setMaximumSize(buttonSize);
+        mainPanel.add(miPerfilButton);
+        mainPanel.add(Box.createVerticalStrut(15));
+
+        mailButton = new JButton("MAIL");
+        mailButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        mailButton.setBackground(verde);
+        mailButton.setForeground(Color.WHITE);
+        mailButton.setFocusable(false);
+        mailButton.setPreferredSize(buttonSize);
+        mailButton.setMaximumSize(buttonSize);
+        mainPanel.add(mailButton);
+        mainPanel.add(Box.createVerticalStrut(15));
+
+        reglasButton = new JButton("REGLAS");
+        reglasButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        reglasButton.setBackground(verde);
+        reglasButton.setForeground(Color.WHITE);
+        reglasButton.setFocusable(false);
+        reglasButton.setPreferredSize(buttonSize);
+        reglasButton.setMaximumSize(buttonSize);
+        mainPanel.add(reglasButton);
+        mainPanel.add(Box.createVerticalStrut(10));
+
+        // Agregar todo el panel al JFrame
+        getContentPane().add(mainPanel);
+    }
+
+    private int forty() {
+        return 40;
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * Ejemplo de main para probar solo esta ventana.
      */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        listaJugadoresButton = new javax.swing.JButton();
-        listaJugadoresButton1 = new javax.swing.JButton();
-        listaJugadoresButton2 = new javax.swing.JButton();
-        listaJugadoresButton3 = new javax.swing.JButton();
-        listaJugadoresButton4 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        listaJugadoresButton.setBackground(new java.awt.Color(0, 102, 51));
-        listaJugadoresButton.setForeground(new java.awt.Color(255, 255, 255));
-        listaJugadoresButton.setText("PROXIMO PARTIDO");
-        listaJugadoresButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaJugadoresButtonActionPerformed(evt);
-            }
-        });
-
-        listaJugadoresButton1.setBackground(new java.awt.Color(0, 102, 51));
-        listaJugadoresButton1.setForeground(new java.awt.Color(255, 255, 255));
-        listaJugadoresButton1.setText("CALIFICACIÓN ÚLTIMO PARTIDO");
-        listaJugadoresButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaJugadoresButton1ActionPerformed(evt);
-            }
-        });
-
-        listaJugadoresButton2.setBackground(new java.awt.Color(0, 102, 51));
-        listaJugadoresButton2.setForeground(new java.awt.Color(255, 255, 255));
-        listaJugadoresButton2.setText("MI PERFIL");
-        listaJugadoresButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaJugadoresButton2ActionPerformed(evt);
-            }
-        });
-
-        listaJugadoresButton3.setBackground(new java.awt.Color(0, 102, 51));
-        listaJugadoresButton3.setForeground(new java.awt.Color(255, 255, 255));
-        listaJugadoresButton3.setText("MAIL");
-        listaJugadoresButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaJugadoresButton3ActionPerformed(evt);
-            }
-        });
-
-        listaJugadoresButton4.setBackground(new java.awt.Color(0, 102, 51));
-        listaJugadoresButton4.setForeground(new java.awt.Color(255, 255, 255));
-        listaJugadoresButton4.setText("REGLAS");
-        listaJugadoresButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listaJugadoresButton4ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISTA/VistaOpcionesJugador/menuJugador.png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(247, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(listaJugadoresButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(listaJugadoresButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(listaJugadoresButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(listaJugadoresButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(listaJugadoresButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(185, 185, 185))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(271, 271, 271))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(listaJugadoresButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(listaJugadoresButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(listaJugadoresButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(listaJugadoresButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(listaJugadoresButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void listaJugadoresButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaJugadoresButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaJugadoresButtonActionPerformed
-
-    private void listaJugadoresButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaJugadoresButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaJugadoresButton1ActionPerformed
-
-    private void listaJugadoresButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaJugadoresButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaJugadoresButton2ActionPerformed
-
-    private void listaJugadoresButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaJugadoresButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaJugadoresButton3ActionPerformed
-
-    private void listaJugadoresButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listaJugadoresButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaJugadoresButton4ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    public static void main(String[] args) {
+        // Intentar aplicar Look and Feel "Nimbus" si está disponible
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuJugador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            // Si falla, se usa el L&F por defecto
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuJugador().setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            MenuJugador ventana = new MenuJugador();
+            ventana.setVisible(true);
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton listaJugadoresButton;
-    private javax.swing.JButton listaJugadoresButton1;
-    private javax.swing.JButton listaJugadoresButton2;
-    private javax.swing.JButton listaJugadoresButton3;
-    private javax.swing.JButton listaJugadoresButton4;
-    // End of variables declaration//GEN-END:variables
 }

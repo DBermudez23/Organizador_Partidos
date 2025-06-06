@@ -30,7 +30,7 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="jLabel3" max="32767" attributes="0"/>
+                      <Component id="jLabel3" pref="161" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jPanel1" max="32767" attributes="0"/>
@@ -45,20 +45,20 @@
                       <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="contraseñaCampo" min="-2" pref="319" max="-2" attributes="0"/>
-                          <Component id="nombreUsuarioLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="nombreUsuarioCampo" min="-2" pref="319" max="-2" attributes="0"/>
-                          <Component id="contraseñaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="nuevoUsuarioBoton" min="-2" pref="135" max="-2" attributes="0"/>
                           <Component id="ingresarBoton" min="-2" pref="135" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="310" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="contraseñaCampo" max="32767" attributes="0"/>
+                          <Component id="nombreUsuarioLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="nombreUsuarioCampo" alignment="1" pref="319" max="32767" attributes="0"/>
+                          <Component id="contraseñaLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -105,11 +105,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="contrase&#xf1;aCampo">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="contrase&#xf1;aCampoActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="nombreUsuarioCampo">
     </Component>
     <Component class="javax.swing.JLabel" name="nombreUsuarioLabel">
@@ -184,6 +179,8 @@
           <Image iconType="3" name="/VISTA/InicioSesion/jugadorSombra.png"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="contrase&#xf1;aCampo">
     </Component>
   </SubComponents>
 </Form>

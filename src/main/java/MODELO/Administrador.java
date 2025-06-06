@@ -11,8 +11,8 @@ public class Administrador implements Usuario {
     // ----------------------------
     // 1. Atributos
     // ----------------------------
-    private int id;   // Identificador único (coincide con usuario_id en la BD)
-    private String nombre; // Opcional: si quieres almacenar el nombre del admin
+    private int id;           // Identificador único (coincide con usuario_id en la BD)
+    private String nombre;    // Opcional: si deseas almacenar el nombre del admin
 
     // ----------------------------
     // 2. Constructores
@@ -51,7 +51,7 @@ public class Administrador implements Usuario {
      * Crea una nueva instancia de Partido.
      * En un caso real, podría inicializar campos y guardarla en la base.
      *
-     * @return objeto Partido recién creado (vacío o con valores predeterminados).
+     * @return objeto Partido recién creado (con fecha actual y no confirmado).
      */
     public Partido crearPartido() {
         Partido p = new Partido();
@@ -64,16 +64,27 @@ public class Administrador implements Usuario {
     /**
      * Genera los equipos para un partido usando el algoritmo de formación dado.
      * Llama al método formarEquipos() del AlgoritmoFormacion, que debe devolver
-     * una lista de 2 equipos (por convención: primero equipoRojo, luego equipoAzul).
+     * una lista de 2 objetos Equipo: el primero será el equipo ROJO, el segundo el AZUL.
      *
-     * @param p         el partido al que se le asignarán los equipos
-     * @param algoritmo implementación concreta de AlgoritmoFormacion
+     * @param p          el partido al que se le asignarán los equipos
+     * @param algoritmo  implementación concreta de AlgoritmoFormacion
      */
     public void generarEquipos(Partido p, AlgoritmoFormacion algoritmo) {
+        // Se asume que algoritmo.formarEquipos(...) devuelve una List<Equipo> de tamaño al menos 2:
+        //   - índices [0] → EquipRojo
+        //   - índices [1] → EquipAzul
         List<Equipo> equipos = algoritmo.formarEquipos(p.getJugadores());
-        if (equipos.size() >= 2) {
-            p.setEquipoRojo((EquipoRojo) equipos.get(0));
-            p.setEquipoAzul((EquipoAzul) equipos.get(1));
+
+        if (equipos != null && equipos.size() >= 2) {
+            // Primer equipo → ROJO
+            Equipo rojo = equipos.get(0);
+            rojo.setTipo(Equipo.TipoEquipo.ROJO);
+            p.setEquipoRojo(rojo);
+
+            // Segundo equipo → AZUL
+            Equipo azul = equipos.get(1);
+            azul.setTipo(Equipo.TipoEquipo.AZUL);
+            p.setEquipoAzul(azul);
         }
     }
 
@@ -83,7 +94,9 @@ public class Administrador implements Usuario {
      * @param j instancia de Jugador a sancionar
      */
     public void sancionar(Jugador j) {
-        j.addInfraccion();
+        if (j != null) {
+            j.addInfraccion();
+        }
     }
 
     /**
@@ -92,21 +105,26 @@ public class Administrador implements Usuario {
      * @param j instancia de Jugador a “des-sancionar”
      */
     public void quitarInfraccion(Jugador j) {
-        int actuales = j.getInfracciones();
-        if (actuales > 0) {
-            j.setInfracciones(actuales - 1);
+        if (j != null) {
+            int actuales = j.getInfracciones();
+            if (actuales > 0) {
+                j.setInfracciones(actuales - 1);
+            }
         }
     }
 
     /**
-     * Marca un partido como confirmado (true) y lo guarda en la base de datos.
+     * Marca un partido como confirmado (true) y, en un caso real,
+     * lo guardaría en la base de datos usando una clase de persistencia.
      *
      * @param p instancia de Partido que se confirmará
      */
     public void confirmarPartido(Partido p) {
-        p.setConfirmado(true);
-        // En un caso real, aquí se podría llamar a Conexion.guardarPartido(...)
-        // para persistir el resultado y los equipos.
+        if (p != null) {
+            p.setConfirmado(true);
+            // En un caso real, aquí se podría invocar a Conexion.guardarPartido(...)
+            // para persistir los resultados y los equipos.
+        }
     }
 
     // ----------------------------

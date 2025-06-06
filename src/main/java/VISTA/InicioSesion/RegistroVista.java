@@ -1,213 +1,239 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package VISTA.InicioSesion;
 
-/**
- *
- * @author danie
- */
-public class RegistroVista extends javax.swing.JFrame {
+import javax.swing.*;
+import java.awt.*;
 
-    /**
-     * Creates new form RegistroVista
-     */
+/**
+ * Formulario de registro para nuevo jugador, con estilo amplio y atractivo.
+ * - Etiqueta de encabezado.
+ * - Campos de entrada grandes.
+ * - Botones destacados con color verde.
+ */
+public class RegistroVista extends JFrame {
+
+    public JTextField nombreUsuarioCampo;
+    public JTextField mailCampo;
+    public JPasswordField contraseñaCampo;
+    public JPasswordField repetirContraseñaCampo;
+    public JButton atrasBoton;
+    public JButton registrarseBoton;
+
+    private JLabel encabezadoLabel;
+    private JLabel nombreUsuarioLabel;
+    private JLabel mailLabel;
+    private JLabel arrobaLabel;
+    private JLabel contraseñaLabel;
+    private JLabel repetirContraseñaLabel;
+    private JPanel formPanel;
+
     public RegistroVista() {
+        super("Registro de Nuevo Jugador");
         initComponents();
+        setSize(600, 450);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+    }
+
+    private void initComponents() {
+        // Fondo blanco
+        getContentPane().setBackground(Color.WHITE);
+        setLayout(new BorderLayout());
+
+        // -----------------------------------
+        // 1) Encabezado en la parte superior
+        // -----------------------------------
+        encabezadoLabel = new JLabel("Crear Cuenta - Fútbol 5", SwingConstants.CENTER);
+        encabezadoLabel.setFont(new Font("SansSerif", Font.BOLD, 26));
+        encabezadoLabel.setForeground(new Color(0, 102, 51));
+        encabezadoLabel.setBorder(BorderFactory.createEmptyBorder(20, 10, 20, 10));
+        add(encabezadoLabel, BorderLayout.NORTH);
+
+        // ---------------------------------------
+        // 2) Panel central con los campos del formulario
+        // ---------------------------------------
+        formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBackground(Color.WHITE);
+        formPanel.setBorder(BorderFactory.createEmptyBorder(10, 40, 10, 40));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(12, 12, 12, 12);
+
+        // 2.1) Nombre de Usuario
+        nombreUsuarioLabel = new JLabel("Nombre de Usuario:");
+        nombreUsuarioLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0.3;
+        formPanel.add(nombreUsuarioLabel, gbc);
+
+        nombreUsuarioCampo = new JTextField();
+        nombreUsuarioCampo.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.weightx = 0.7;
+        formPanel.add(nombreUsuarioCampo, gbc);
+
+        // 2.2) Mail (parte local + etiqueta fija)
+        mailLabel = new JLabel("Mail:");
+        mailLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 0.3;
+        formPanel.add(mailLabel, gbc);
+
+        JPanel mailPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        mailPanel.setBackground(Color.WHITE);
+        mailCampo = new JTextField();
+        mailCampo.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        mailCampo.setPreferredSize(new Dimension(200,  thirtySix()));
+       (mailPanel).add(mailCampo);
+
+        arrobaLabel = new JLabel("@futbol5.com");
+        arrobaLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        mailPanel.add(arrobaLabel);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 0.7;
+        formPanel.add(mailPanel, gbc);
+
+        // 2.3) Contraseña
+        contraseñaLabel = new JLabel("Contraseña:");
+        contraseñaLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.weightx = 0.3;
+        formPanel.add(contraseñaLabel, gbc);
+
+        contraseñaCampo = new JPasswordField();
+        contraseñaCampo.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.weightx = 0.7;
+        formPanel.add(contraseñaCampo, gbc);
+
+        // 2.4) Repetir Contraseña
+        repetirContraseñaLabel = new JLabel("Repetir Contraseña:");
+        repetirContraseñaLabel.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.weightx = 0.3;
+        formPanel.add(repetirContraseñaLabel, gbc);
+
+        repetirContraseñaCampo = new JPasswordField();
+        repetirContraseñaCampo.setFont(new Font("SansSerif", Font.PLAIN, 18));
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.weightx = 0.7;
+        formPanel.add(repetirContraseñaCampo, gbc);
+
+        add(formPanel, BorderLayout.CENTER);
+
+        // ----------------------------
+        // 3) Panel inferior (botones)
+        // ----------------------------
+        JPanel botonesPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 15));
+        botonesPanel.setBackground(Color.WHITE);
+
+        atrasBoton = new JButton("ATRÁS");
+        atrasBoton.setFont(new Font("SansSerif", Font.BOLD, 16));
+        atrasBoton.setBackground(new Color(0, 102, 51));
+        atrasBoton.setForeground(Color.WHITE);
+        atrasBoton.setPreferredSize(new Dimension(120,  forty()));
+        atrasBoton.setFocusPainted(false);
+        botonesPanel.add(atrasBoton);
+
+        registrarseBoton = new JButton("REGISTRARSE");
+        registrarseBoton.setFont(new Font("SansSerif", Font.BOLD, 16));
+        registrarseBoton.setBackground(new Color(0, 102, 51));
+        registrarseBoton.setForeground(Color.WHITE);
+        registrarseBoton.setPreferredSize(new Dimension(160,  forty()));
+        registrarseBoton.setFocusPainted(false);
+        botonesPanel.add(registrarseBoton);
+
+        add(botonesPanel, BorderLayout.SOUTH);
+    }
+
+    private int thirtySix() {
+        return 36;
+    }
+
+    private int forty() {
+        return 40;
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * Devuelve el nombre de usuario ingresado.
      */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        jLabel1 = new javax.swing.JLabel();
-        nombreUsuarioCampo = new javax.swing.JTextField();
-        nombreUsuarioLabel = new javax.swing.JLabel();
-        MailLabel = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        mailCampo = new javax.swing.JTextField();
-        labelContraseña = new javax.swing.JLabel();
-        contraseñaCampo = new javax.swing.JPasswordField();
-        labelRepetirContraseña = new javax.swing.JLabel();
-        repetirContraseñaCampo = new javax.swing.JPasswordField();
-        atrasBoton = new javax.swing.JButton();
-        registrarseBoton = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISTA/InicioSesion/LogoFut5.png"))); // NOI18N
-
-        nombreUsuarioLabel.setText("Nombre de Usuario");
-
-        MailLabel.setText("Mail");
-
-        jLabel4.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel4.setText("@futbol5.com");
-
-        mailCampo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mailCampoActionPerformed(evt);
-            }
-        });
-
-        labelContraseña.setText("Contraseña");
-
-        labelRepetirContraseña.setText("Repetir Contraseña");
-
-        atrasBoton.setBackground(new java.awt.Color(0, 102, 51));
-        atrasBoton.setForeground(new java.awt.Color(255, 255, 255));
-        atrasBoton.setText("ATRAS");
-
-        registrarseBoton.setBackground(new java.awt.Color(0, 102, 51));
-        registrarseBoton.setForeground(new java.awt.Color(255, 255, 255));
-        registrarseBoton.setText("REGISTRARSE");
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISTA/InicioSesion/registroNuevoJugador.png"))); // NOI18N
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/VISTA/InicioSesion/jugadorSombra.png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelRepetirContraseña)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(atrasBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(registrarseBoton))
-                                .addComponent(repetirContraseñaCampo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(contraseñaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelContraseña)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(MailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4))
-                                .addComponent(mailCampo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(nombreUsuarioCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombreUsuarioLabel))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(295, 295, 295))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(8, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2)
-                        .addComponent(nombreUsuarioLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nombreUsuarioCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MailLabel)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(mailCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(labelContraseña)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(contraseñaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(labelRepetirContraseña)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(repetirContraseñaCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(atrasBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(registrarseBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(40, 40, 40))
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void mailCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mailCampoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mailCampoActionPerformed
+    public String getUsername() {
+        return nombreUsuarioCampo.getText().trim();
+    }
 
     /**
-     * @param args the command line arguments
+     * Devuelve la parte “local” del mail (antes de @futbol5.com).
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    public String getMailLocalPart() {
+        return mailCampo.getText().trim();
+    }
+
+    /**
+     * @return la contraseña ingresada como arreglo de char.
+     */
+    public char[] getPassword() {
+        return contraseñaCampo.getPassword();
+    }
+
+    /**
+     * @return la repetición de contraseña ingresada como arreglo de char.
+     */
+    public char[] getPasswordRepeat() {
+        return repetirContraseñaCampo.getPassword();
+    }
+
+    /**
+     * Muestra un mensaje de error (por ejemplo, si las contraseñas no coinciden).
+     */
+    public void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(
+            this,
+            mensaje,
+            "Error de Registro",
+            JOptionPane.ERROR_MESSAGE
+        );
+    }
+
+    /**
+     * Muestra un mensaje de información (por ejemplo, “Registro exitoso”).
+     */
+    public void mostrarInfo(String mensaje) {
+        JOptionPane.showMessageDialog(
+            this,
+            mensaje,
+            "Registro",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    /**
+     * Método main de prueba para abrir solo esta ventana.
+     */
+    public static void main(String[] args) {
+        // Forzar look and feel “Nimbus” si está disponible
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RegistroVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RegistroVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RegistroVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RegistroVista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            // Si falla, se usa look & feel por defecto
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RegistroVista().setVisible(true);
-            }
+        SwingUtilities.invokeLater(() -> {
+            RegistroVista registro = new RegistroVista();
+            registro.setVisible(true);
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JLabel MailLabel;
-    public javax.swing.JButton atrasBoton;
-    public javax.swing.JPasswordField contraseñaCampo;
-    public javax.swing.JLabel jLabel1;
-    public javax.swing.JLabel jLabel4;
-    public javax.swing.JLabel jLabel7;
-    public javax.swing.JLabel jLabel8;
-    public javax.swing.JLabel labelContraseña;
-    public javax.swing.JLabel labelRepetirContraseña;
-    public javax.swing.JTextField mailCampo;
-    public javax.swing.JTextField nombreUsuarioCampo;
-    public javax.swing.JLabel nombreUsuarioLabel;
-    public javax.swing.JButton registrarseBoton;
-    public javax.swing.JPasswordField repetirContraseñaCampo;
-    // End of variables declaration//GEN-END:variables
 }
